@@ -1,4 +1,3 @@
-
 #include "tft_lcd_ili9341/ili9341/ili9341.h"
 #include "tft_lcd_ili9341/gfx/gfx.h"
 
@@ -10,11 +9,14 @@
 #include "task.h"
 #include "queue.h"
 
+// backlight pin
 #define LCD_BACKLIGHT_PIN   15
 
+// LDR on ADC0 / GPIO26
 #define LDR_ADC_CH          0
 #define LDR_GPIO            26
 
+// queue holds one uint16_t
 static QueueHandle_t xLdrQueue;
 
 static void sensor_task(void *pvParameters) {
@@ -30,7 +32,6 @@ static void sensor_task(void *pvParameters) {
 
 static void display_task(void *pvParameters) {
     uint16_t ldr;
-    char buf[16];
 
     LCD_initDisplay();
     LCD_setRotation(0);
